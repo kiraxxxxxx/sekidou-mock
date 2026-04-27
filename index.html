@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>石道鋼板株式会社 | 鉄鋼の課題解決工場</title>
+<meta name="description" content="創業1966年。極厚鋼板のガス切断加工と、自社ブランドMAJINの開発製造。東京都江戸川区。">
+<style>
+  /* ===== Reset & Base ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Yu Gothic", "Hiragino Sans", "Noto Sans JP", sans-serif;
+    color: #1a1a1a;
+    line-height: 1.7;
+    background: #fafafa;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ===== Color Tokens ===== */
+  :root {
+    --bg: #0d0d0d;
+    --bg-soft: #1a1a1a;
+    --surface: #fafafa;
+    --surface-alt: #f0f0f0;
+    --text: #1a1a1a;
+    --text-soft: #6a6a6a;
+    --text-on-dark: #f5f5f5;
+    --text-on-dark-soft: #a8a8a8;
+    --accent: #d97706;        /* 火花のオレンジ */
+    --accent-hot: #ea580c;
+    --line: #e5e5e5;
+    --line-dark: #2a2a2a;
+  }
+
+  /* ===== Typography ===== */
+  .serif { font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; }
+  .en { font-family: "Helvetica Neue", Arial, sans-serif; letter-spacing: 0.08em; }
+
+  /* ===== Layout ===== */
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  .container-narrow { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+
+  /* ===== Header ===== */
+  header.site-header {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px;
+    max-width: 1440px; margin: 0 auto;
+  }
+  .logo {
+    color: var(--text-on-dark);
+    font-size: 18px; font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .logo small {
+    display: block; font-size: 10px;
+    color: var(--text-on-dark-soft);
+    font-weight: 400; letter-spacing: 0.2em;
+    margin-top: 2px;
+  }
+  nav ul {
+    display: flex; gap: 32px; list-style: none;
+    align-items: center;
+  }
+  nav a {
+    color: var(--text-on-dark);
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--accent); }
+  nav .cta {
+    padding: 10px 20px;
+    border: 1px solid var(--text-on-dark);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  nav .cta:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  @media (max-width: 768px) {
+    nav ul li:not(.nav-cta) { display: none; }
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 640px;
+    background: var(--bg);
+    overflow: hidden;
+    display: flex; align-items: center;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('images/sekidou_20231208_5.jpg');
+    background-size: cover; background-position: center;
+    opacity: 0.55;
+    filter: grayscale(20%) contrast(1.05);
+  }
+  .hero-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(13,13,13,0.85) 0%,
+      rgba(13,13,13,0.6) 40%,
+      rgba(13,13,13,0.3) 100%
+    );
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    color: var(--text-on-dark);
+    padding: 0 64px;
+    max-width: 900px;
+  }
+  .hero-tag {
+    font-size: 12px; letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 72px);
+    line-height: 1.2;
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+  .hero h1 .accent { color: var(--accent); }
+  .hero p.lead {
+    font-size: 18px;
+    line-height: 1.9;
+    color: var(--text-on-dark-soft);
+    margin-bottom: 48px;
+    max-width: 560px;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 16px 32px;
+    font-size: 14px;
+    border: 1px solid var(--text-on-dark);
+    color: var(--text-on-dark);
+    transition: all 0.2s;
+  }
+  .btn:hover {
+    background: var(--text-on-dark);
+    color: var(--bg);
+  }
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: var(--accent-hot);
+    border-color: var(--accent-hot);
+    color: #fff;
+  }
+  .btn::after {
+    content: '→';
+    transition: transform 0.2s;
+  }
+  .btn:hover::after { transform: translateX(4px); }
+
+  .hero-stats {
+    position: absolute; bottom: 48px; right: 64px;
+    display: flex; gap: 48px;
+    color: var(--text-on-dark);
+    z-index: 2;
+  }
+  @media (max-width: 1024px) { .hero-stats { display: none; } }
+  .hero-stat {
+    text-align: right;
+  }
+  .hero-stat .num {
+    font-size: 48px; font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .hero-stat .label {
+    font-size: 11px; letter-spacing: 0.2em;
+    color: var(--text-on-dark-soft);
+    margin-top: 8px;
+  }
+
+  /* ===== Section common ===== */
+  section {
+    padding: 120px 0;
+  }
+  .section-head {
+    margin-bottom: 64px;
+  }
+  .section-head .en {
+    font-size: 12px; letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .section-head h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .section-head .lead {
+    margin-top: 24px;
+    font-size: 16px;
+    color: var(--text-soft);
+    max-width: 680px;
+  }
+
+  /* ===== Section: 3 Pillars ===== */
+  .pillars {
+    background: #fff;
+  }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) { .pillars-grid { grid-template-columns: 1fr; } }
+  .pillar {
+    background: var(--surface-alt);
+    padding: 48px 32px;
+    border-top: 3px solid var(--accent);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .pillar:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+  }
+  .pillar .num {
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+  }
+  .pillar h3 {
+    font-size: 22px;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .pillar p {
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 1.8;
+  }
+
+  /* ===== Section: B2B Core (Gas Cutting) ===== */
+  .b2b {
+    background: var(--bg);
+    color: var(--text-on-dark);
+  }
+  .b2b-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  @media (max-width: 900px) { .b2b-grid { grid-template-columns: 1fr; gap: 48px; } }
+  .b2b-img {
+    aspect-ratio: 4/3;
+    background-size: cover; background-position: center;
+    background-image: url('images/sekidou_20231208_3.jpg');
+  }
+  .b2b .section-head h2 { color: var(--text-on-dark); }
+  .b2b .section-head .en { color: var(--accent); }
+  .b2b ul.specs {
+    list-style: none;
+    margin-top: 32px;
+    border-top: 1px solid var(--line-dark);
+  }
+  .b2b ul.specs li {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line-dark);
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 24px;
+  }
+  .b2b ul.specs .label {
+    font-size: 12px; letter-spacing: 0.15em;
+    color: var(--text-on-dark-soft);
+    flex-shrink: 0; min-width: 120px;
+  }
+  .b2b ul.specs .val {
+    font-size: 18px;
+    color: var(--text-on-dark);
+    font-weight: 500;
+  }
+  .b2b ul.specs .val strong {
+    color: var(--accent);
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  /* ===== Section: Processing Examples Gallery ===== */
+  .gallery {
+    background: var(--surface);
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  @media (max-width: 768px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+  .gallery-grid .item {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: #ccc;
+    position: relative;
+  }
+  .gallery-grid .item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .gallery-grid .item:hover img {
+    transform: scale(1.05);
+  }
+
+  /* ===== Section: MAJIN ===== */
+  .majin {
+    background: linear-gradient(180deg, #fafafa 0%, #f0e6d8 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .majin-hero {
+    aspect-ratio: 21/9;
+    background-image: url('images/CA100451.jpg');
+    background-size: cover; background-position: center;
+    margin-bottom: 64px;
+    position: relative;
+  }
+  .majin-hero::after {
+    content: 'MAJIN';
+    position: absolute;
+    bottom: 32px; right: 48px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(48px, 9vw, 120px);
+    font-weight: 900;
+    color: rgba(255,255,255,0.95);
+    letter-spacing: 0.05em;
+    text-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    line-height: 1;
+  }
+  .majin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  @media (max-width: 900px) { .majin-grid { grid-template-columns: 1fr; } }
+  .majin-text h3 {
+    font-size: 28px;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  .majin-text p {
+    color: var(--text-soft);
+    margin-bottom: 16px;
+  }
+  .majin-thumbs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .majin-thumbs .thumb {
+    aspect-ratio: 1;
+    background-size: cover; background-position: center;
+  }
+
+  /* ===== Section: Problem Solving ===== */
+  .solving {
+    background: #fff;
+  }
+  .solving-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  @media (max-width: 900px) { .solving-grid { grid-template-columns: 1fr; } }
+  .solving-card {
+    padding: 32px;
+    border-left: 3px solid var(--accent);
+    background: var(--surface-alt);
+  }
+  .solving-card .q {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+  }
+  .solving-card h4 {
+    font-size: 18px;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .solving-card p {
+    font-size: 14px;
+    color: var(--text-soft);
+  }
+
+  /* ===== Section: Trust / Partners ===== */
+  .trust {
+    background: var(--surface-alt);
+    text-align: center;
+  }
+  .trust-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-bottom: 80px;
+  }
+  @media (max-width: 768px) { .trust-stats { grid-template-columns: repeat(2, 1fr); } }
+  .trust-stat .num {
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+  }
+  .trust-stat .label {
+    margin-top: 12px;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--text-soft);
+  }
+  .partners {
+    text-align: left;
+  }
+  .partners h3 {
+    font-size: 16px;
+    margin-bottom: 24px;
+    color: var(--text-soft);
+    text-align: center;
+  }
+  .partners ul {
+    list-style: none;
+    display: flex; flex-wrap: wrap; gap: 16px 32px;
+    justify-content: center;
+  }
+  .partners li {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 12px 24px;
+    background: #fff;
+    border: 1px solid var(--line);
+  }
+
+  /* ===== Section: Philosophy ===== */
+  .philosophy {
+    background: var(--bg);
+    color: var(--text-on-dark);
+    background-image:
+      linear-gradient(rgba(13,13,13,0.92), rgba(13,13,13,0.92)),
+      url('images/sekidou_20231208_2.jpg');
+    background-size: cover; background-position: center;
+  }
+  .philosophy .section-head h2 { color: var(--text-on-dark); }
+  .philosophy .section-head .en { color: var(--accent); }
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+  }
+  @media (max-width: 900px) { .philosophy-grid { grid-template-columns: 1fr; gap: 32px; } }
+  .philosophy-item {
+    border-top: 2px solid var(--accent);
+    padding-top: 32px;
+  }
+  .philosophy-item .key {
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .philosophy-item h3 {
+    font-size: 22px;
+    margin-bottom: 16px;
+    line-height: 1.5;
+    color: var(--text-on-dark);
+  }
+  .philosophy-item p {
+    font-size: 14px;
+    color: var(--text-on-dark-soft);
+    line-height: 1.9;
+  }
+
+  /* ===== Section: News ===== */
+  .news {
+    background: var(--surface);
+  }
+  .news-list {
+    display: flex; flex-direction: column;
+    gap: 0;
+  }
+  .news-item {
+    display: grid;
+    grid-template-columns: 140px 120px 1fr;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+    transition: background 0.2s;
+  }
+  .news-item:hover {
+    background: var(--surface-alt);
+    padding-left: 16px; padding-right: 16px;
+  }
+  @media (max-width: 768px) {
+    .news-item { grid-template-columns: 1fr; gap: 8px; }
+  }
+  .news-date {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: var(--text-soft);
+    font-size: 14px;
+  }
+  .news-cat {
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    border: 1px solid var(--accent);
+    padding: 4px 12px;
+    display: inline-block;
+    width: fit-content;
+  }
+  .news-title {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ===== Section: CTA ===== */
+  .cta-section {
+    background: var(--bg);
+    color: var(--text-on-dark);
+    text-align: center;
+    padding: 100px 0;
+  }
+  .cta-section h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 24px;
+    color: var(--text-on-dark);
+  }
+  .cta-section p {
+    color: var(--text-on-dark-soft);
+    margin-bottom: 48px;
+    font-size: 16px;
+  }
+  .cta-actions {
+    display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+  }
+
+  /* ===== Footer ===== */
+  footer.site-footer {
+    background: #050505;
+    color: var(--text-on-dark-soft);
+    padding: 64px 0 32px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
+  .footer-brand .logo { color: var(--text-on-dark); margin-bottom: 24px; }
+  .footer-brand address {
+    font-style: normal;
+    font-size: 13px;
+    line-height: 1.9;
+  }
+  .footer-col h4 {
+    color: var(--text-on-dark);
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 12px; }
+  .footer-col a {
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom {
+    padding-top: 32px;
+    text-align: center;
+    font-size: 12px;
+    color: #555;
+  }
+
+  /* ===== Mock Banner (制作物であることを示す) ===== */
+  .mock-banner {
+    position: fixed; bottom: 16px; left: 16px;
+    z-index: 200;
+    background: rgba(217, 119, 6, 0.95);
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    border-radius: 2px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#" class="logo">石道鋼板株式会社<small>SEKIDOU KOUHAN</small></a>
+    <nav>
+      <ul>
+        <li><a href="#b2b">ガス切断加工</a></li>
+        <li><a href="#gallery">加工例</a></li>
+        <li><a href="#majin">MAJIN</a></li>
+        <li><a href="#philosophy">企業理念</a></li>
+        <li><a href="#news">NEWS</a></li>
+        <li class="nav-cta"><a href="#cta" class="cta">お見積り・問合せ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-tag en">SINCE 1966 — TOKYO EDOGAWA</p>
+    <h1>鉄鋼の課題、<br>ぜんぶ <span class="accent">ここ</span> で解決する。</h1>
+    <p class="lead">
+      創業半世紀、極厚鋼板のガス切断加工を磨き続けてきました。<br>
+      6mmから150mmまで、国内外の鋼材を常時在庫。<br>
+      短納期・少ロット・特殊型切り、まずはご相談ください。
+    </p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn btn-primary">お見積り・お問合せ</a>
+      <a href="#b2b" class="btn">事業内容を見る</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">50+</div><div class="label en">YEARS</div></div>
+    <div class="hero-stat"><div class="num">150<small style="font-size:24px;">mm</small></div><div class="label en">MAX THICKNESS</div></div>
+  </div>
+</section>
+
+<!-- ===== 3 Pillars ===== -->
+<section class="pillars">
+  <div class="container">
+    <div class="section-head">
+      <p class="en">WHAT WE DO</p>
+      <h2>三つの柱で、<br>鉄鋼の課題に応えます。</h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="num en">01 — CORE</div>
+        <h3>厚板ガス切断加工</h3>
+        <p>創業以来50年以上磨き続けてきた本業。極厚板の寸法切り・型切り・特殊形状まで、職人技と機械加工で対応します。</p>
+      </div>
+      <div class="pillar">
+        <div class="num en">02 — STOCK</div>
+        <h3>厚板鋼板の常時在庫・短納期納品</h3>
+        <p>6mmから150mmまで、国内品・海外品を幅広く在庫。少ロット・短納期のご相談にも柔軟にお応えします。</p>
+      </div>
+      <div class="pillar">
+        <div class="num en">03 — BRAND</div>
+        <h3>自社ブランド MAJIN</h3>
+        <p>長年のガス溶断技術を活かした、肉専用 超極厚鉄板ブランド。アウトドア市場で高評価。OEMにも対応します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== B2B Core ===== -->
+<section class="b2b" id="b2b">
+  <div class="container">
+    <div class="b2b-grid">
+      <div class="b2b-img"></div>
+      <div>
+        <div class="section-head">
+          <p class="en">01 — GAS CUTTING</p>
+          <h2>50年以上の信頼と技術で、<br>極厚板の精密切断を。</h2>
+          <p class="lead" style="color: var(--text-on-dark-soft);">
+            国内/海外の6mm-150mmの厚板を常時在庫。<br>
+            極厚板の寸法切り・型切りが可能です。
+          </p>
+        </div>
+        <ul class="specs">
+          <li><span class="label en">THICKNESS</span><span class="val">6mm <strong>–</strong> 150mm</span></li>
+          <li><span class="label en">EXPERIENCE</span><span class="val"><strong>50+</strong> 年のガス溶断実績</span></li>
+          <li><span class="label en">SUPPLY</span><span class="val">国内/海外品 常時在庫</span></li>
+          <li><span class="label en">DELIVERY</span><span class="val"><strong>短納期</strong> 少ロット対応</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Gallery ===== -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-head">
+      <p class="en">PROCESSING EXAMPLES</p>
+      <h2>加工例ギャラリー</h2>
+      <p class="lead">私たちの技術がどこまで応えられるか、現場の写真で。</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="item"><img src="images/sekidou_20231208_3.jpg" alt="厚板への手書きケガキ"></div>
+      <div class="item"><img src="images/sekidou_20231208_4.jpg" alt="ガス切断トーチの操作"></div>
+      <div class="item"><img src="images/sekidou_20231208_1.jpg" alt="極厚板の切断・スパーク"></div>
+      <div class="item"><img src="images/sekidou_20231208_2.jpg" alt="着火するスパーク"></div>
+      <div class="item"><img src="images/sekidou_20231208_5.jpg" alt="工場全景・職人と火花"></div>
+      <div class="item"><img src="images/sekidou_20231208_6.jpg" alt="石道鋼板 工場外観"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAJIN ===== -->
+<section class="majin" id="majin">
+  <div class="container">
+    <div class="section-head">
+      <p class="en">03 — OUR BRAND</p>
+      <h2>長年のガス溶断技術が、<br>食卓と焚き火台へ。</h2>
+    </div>
+    <div class="majin-hero"></div>
+    <div class="majin-grid">
+      <div class="majin-text">
+        <h3>肉専用 超極厚鉄板「MAJIN」</h3>
+        <p>溶断技術を知り尽くした石道鋼板だからつくれる、極厚の鉄板。一度温まれば冷めにくく、肉の旨みを閉じ込めて焼き上げます。</p>
+        <p>キャンプ・焚き火・自宅のコンロまで、シーンを問わず使える設計。OEMのご相談もお受けしています。</p>
+        <p style="margin-top: 32px;"><a href="#cta" class="btn" style="border-color: var(--text); color: var(--text);">MAJIN詳細・購入</a></p>
+      </div>
+      <div class="majin-thumbs">
+        <div class="thumb" style="background-image: url('images/CA200988.jpg');"></div>
+        <div class="thumb" style="background-image: url('images/CA201020.jpg');"></div>
+        <div class="thumb" style="background-image: url('images/CA201095.jpg');"></div>
+        <div class="thumb" style="background-image: url('images/CA201005.jpg');"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Problem Solving ===== -->
+<section class="solving">
+  <div class="container">
+    <div class="section-head">
+      <p class="en">PROBLEM SOLVING</p>
+      <h2>こんな課題、<br>解決してきました。</h2>
+    </div>
+    <div class="solving-grid">
+      <div class="solving-card">
+        <p class="q">CASE 01</p>
+        <h4>既存サプライヤーでは厚みが足りない</h4>
+        <p>150mmまでの極厚板を常時在庫。試作1枚から対応可能。短納期で動ける体制があります。</p>
+      </div>
+      <div class="solving-card">
+        <p class="q">CASE 02</p>
+        <h4>少ロットの特殊形状を断られた</h4>
+        <p>50年以上の型切り経験で、複雑な形状も加工可能。少ロットでも快くお引き受けします。</p>
+      </div>
+      <div class="solving-card">
+        <p class="q">CASE 03</p>
+        <h4>新規ブランドのOEM素材を探している</h4>
+        <p>自社ブランドMAJINで培ったプロダクト視点で、素材選定からOEM製造までワンストップで支援します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Trust ===== -->
+<section class="trust">
+  <div class="container">
+    <div class="section-head" style="text-align: center;">
+      <p class="en">RESULTS & PARTNERS</p>
+      <h2>信頼の積み重ね</h2>
+    </div>
+    <div class="trust-stats">
+      <div class="trust-stat"><div class="num">1966</div><div class="label en">FOUNDED</div></div>
+      <div class="trust-stat"><div class="num">50+</div><div class="label en">YEARS OF CRAFT</div></div>
+      <div class="trust-stat"><div class="num">150<span style="font-size:24px;">mm</span></div><div class="label en">MAX THICKNESS</div></div>
+      <div class="trust-stat"><div class="num">11</div><div class="label en">EMPLOYEES</div></div>
+    </div>
+    <div class="partners">
+      <h3>主要取引先</h3>
+      <ul>
+        <li>日鉄物産株式会社</li>
+        <li>株式会社メタルワン特殊鋼</li>
+        <li>大成興業株式会社</li>
+        <li class="en" style="color: var(--text-soft);">ほか多数</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Philosophy ===== -->
+<section class="philosophy" id="philosophy">
+  <div class="container">
+    <div class="section-head">
+      <p class="en">PHILOSOPHY</p>
+      <h2>事業で関わる人すべてを幸せにし、<br>地域社会の発展に寄与する。</h2>
+    </div>
+    <div class="philosophy-grid">
+      <div class="philosophy-item">
+        <p class="key en">MISSION</p>
+        <h3>関わる人すべてを幸せに</h3>
+        <p>これが私共の成したいことであり、実現に向け活動することが使命だと考えています。</p>
+      </div>
+      <div class="philosophy-item">
+        <p class="key en">VISION</p>
+        <h3>鉄鋼の課題解決工場</h3>
+        <p>鉄鋼におけるあらゆる問題は弊社に相談すれば解決する。お客様の課題解決パートナーを目指します。</p>
+      </div>
+      <div class="philosophy-item">
+        <p class="key en">VALUE</p>
+        <h3>誠実・迅速・挑戦</h3>
+        <p>創業以来大切にしている行動指針を体現するため、社員一同、日々精進して参ります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== News ===== -->
+<section class="news" id="news">
+  <div class="container">
+    <div class="section-head">
+      <p class="en">NEWS</p>
+      <h2>お知らせ</h2>
+    </div>
+    <div class="news-list">
+      <a class="news-item" href="#">
+        <div class="news-date">2026.03.11</div>
+        <div><span class="news-cat en">MEDIA</span></div>
+        <div class="news-title">鉄鋼新聞に掲載頂きました</div>
+      </a>
+      <a class="news-item" href="#">
+        <div class="news-date">2025.12.23</div>
+        <div><span class="news-cat en">EVENT</span></div>
+        <div class="news-title">「事業承継 後継者交流会 2026」に登壇しました</div>
+      </a>
+      <a class="news-item" href="#">
+        <div class="news-date">2025.03.18</div>
+        <div><span class="news-cat en">MEDIA</span></div>
+        <div class="news-title">東京都中小企業振興公社様より取材頂きました</div>
+      </a>
+      <a class="news-item" href="#">
+        <div class="news-date">2024.11.27</div>
+        <div><span class="news-cat en">EVENT</span></div>
+        <div class="news-title">多摩イノベーションコミュニティのワークショップ登壇しました</div>
+      </a>
+      <a class="news-item" href="#">
+        <div class="news-date">2024.09.04</div>
+        <div><span class="news-cat en">EVENT</span></div>
+        <div class="news-title">日本経済新聞社 取引適正化シンポジウムに登壇しました</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section" id="cta">
+  <div class="container-narrow">
+    <h2>まずは、ご相談ください。</h2>
+    <p>お見積り・サンプル・OEMのご相談、お気軽にどうぞ。<br>担当より迅速にご連絡いたします。</p>
+    <div class="cta-actions">
+      <a href="#" class="btn btn-primary">お問い合わせフォーム</a>
+      <a href="tel:0336539321" class="btn">03-3653-9321</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="logo">石道鋼板株式会社<small>SEKIDOU KOUHAN</small></p>
+        <address>
+          〒132-0025<br>
+          東京都江戸川区松江4-25-17<br>
+          TEL 03-3653-9321
+        </address>
+      </div>
+      <div class="footer-col">
+        <h4>SERVICES</h4>
+        <ul>
+          <li><a href="#b2b">厚板ガス切断・溶断</a></li>
+          <li><a href="#gallery">厚板鋼板 加工例</a></li>
+          <li><a href="#majin">MAJIN（自社ブランド）</a></li>
+          <li><a href="#cta">OEMご相談</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>COMPANY</h4>
+        <ul>
+          <li><a href="#philosophy">企業理念</a></li>
+          <li><a href="#">会社概要</a></li>
+          <li><a href="#news">NEWS</a></li>
+          <li><a href="#cta">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © SEKIDOU KOUHAN Corporation. All Rights Reserved.
+    </div>
+  </div>
+</footer>
+
+<div class="mock-banner">MOCK v1 — by MEGURIWA support</div>
+
+</body>
+</html>
