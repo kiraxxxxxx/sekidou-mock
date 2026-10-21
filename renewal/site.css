@@ -403,3 +403,10 @@ body.menu-open .hd .logo img{filter:none}
 /* v7 生成文字ロゴ（2026-10-20） */
 .logo img.wm{height:34px;width:auto}
 @media (max-width:820px){.logo img.wm{height:26px}}
+
+/* v9 MAJIN 4モデルのカード */
+.ln__t--jp{font-family:var(--jp)!important;font-size:16px!important;font-weight:900;letter-spacing:.02em!important;line-height:1.45!important}
+.ln__t--jp span{font-family:var(--en);font-size:1.15em;letter-spacing:.04em}
+.ln__b p{margin-top:8px}
+.ln__price{font-family:var(--en);font-weight:700;font-size:22px;color:var(--iron)!important;letter-spacing:.02em}
+.ln__price small{font-family:var(--jp);font-size:11px;font-weight:500;color:var(--gray);margin-left:2px}
