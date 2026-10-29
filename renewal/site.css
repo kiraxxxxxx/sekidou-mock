@@ -413,3 +413,20 @@ body.menu-open .hd .logo img{filter:none}
 
 /* v10 */
 .feat__lab{font-weight:900;font-size:15px;margin:0 0 14px;padding-left:12px;border-left:3px solid var(--fire)}
+
+/* v12 本番ロゴ（横組み・白／黒） */
+.logo .lg{height:40px;width:auto;filter:none!important}
+.logo .lg--b{display:none}
+.hd.is-solid .logo .lg--w{display:none}.hd.is-solid .logo .lg--b{display:block}
+body.menu-open .hd .logo .lg--w{display:block}body.menu-open .hd .logo .lg--b{display:none}
+@media (max-width:820px){.logo .lg{height:34px}}
+
+/* v13 石原様HP確認（2026-10-29） */
+.hero{height:auto;min-height:max(100svh,640px);display:flex;flex-direction:column}
+.hero__in{height:auto;flex:1 0 auto;padding-top:calc(76px + 44px)}
+.hero__copy{font-size:min(clamp(44px,6.6vw,100px),10.5svh)}
+@media (max-width:820px){.hero__in{padding-top:calc(62px + 36px)}.hero__copy{font-size:min(clamp(40px,11.5vw,56px),8.4svh)}}
+body{word-break:keep-all;overflow-wrap:break-word;line-break:strict}
+.nm b,.fc b,.ln__price{white-space:nowrap}
+.ln__catch{margin-top:8px;font-weight:700;font-size:14px;line-height:1.6;color:var(--iron)!important;padding-left:14px;position:relative}
+.ln__catch::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;background:var(--fire)}
